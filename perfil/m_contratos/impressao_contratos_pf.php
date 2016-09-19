@@ -48,6 +48,8 @@ $link38 = $http."rlt_proposta_exposicao_edital_pf.php"."?id=".$id_ped."&penal=23
 $link39 = $http."rlt_proposta_mediacao_edital_pf.php"."?id=".$id_ped."&penal=25";
 $link40 = $http."rlt_proposta_contadores_edital_pf.php"."?id=".$id_ped."&penal=26";
 $link41 = $http."rlt_proposta_galadeballet_edital_pf.php"."?id=".$id_ped."&penal=29";
+$link42 = $http."rlt_pedido_reserva_oficinaseditalcasa_pf.php";
+
 
  
  
@@ -175,6 +177,12 @@ $link41 = $http."rlt_proposta_galadeballet_edital_pf.php"."?id=".$id_ped."&penal
 			<td><a href='$link34?id=$id_ped' target='_blank'><strong>Reserva de Verba com Transferência</strong></a></td>
 			<td><a href='$link35?id=$id_ped' target='_blank'><strong>Reserva de Verba com Transferência - VIRADA</strong></a></td>
 		</tr>
+		
+		<tr>
+			<td><a href='$link42?id=$id_ped' target='_blank'><strong>Reserva de Oficinas - Edital Casas de Cultura</strong></a></td>
+		</tr>
+		
+		
 		
 		
 	  </tbody>
