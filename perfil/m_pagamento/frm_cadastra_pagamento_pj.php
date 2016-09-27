@@ -10,6 +10,8 @@ $link4=$http."rlt_pagamento_parcelado_2rep_pj.php";
 $link5=$http."rlt_recibo_pagamento_1rep_pj.php";
 $link6=$http."rlt_recibo_pagamento_2rep_pj.php";
 $link7=$http."rlt_declaracao_simples_pj.php";
+$link8=$http."rlt_recibo_pagamento_parcelado_1rep_pj.php";
+$link9=$http."rlt_recibo_pagamento_parcelado_2rep_pj.php";
 $data = date('Y-m-d H:i:s');
 
 
@@ -163,8 +165,8 @@ for($i = 1; $i < count($parcelamento); $i++)
 	echo '<td class="list_description">'.$parcelamento[$i]['pagamento'].'</td>';
 	echo '<td class="list_description"><a target="_blank" href='.$link3.'?id='.$id_ped.'&parcela='.$i.'>1 Representante</a></td>';
 	echo '<td class="list_description"><a target="_blank" href='.$link4.'?id='.$id_ped.'&parcela='.$i.'>2 Representantes</a></td>';
-	echo '<td class="list_description"><a target="_blank" href='.$link5.'?id='.$id_ped.'&parcela='.$i.'>1 Representante</a></td>';
-	echo '<td class="list_description"><a target="_blank" href='.$link6.'?id='.$id_ped.'&parcela='.$i.'>2 Representantes</a></td>';
+	echo '<td class="list_description"><a target="_blank" href='.$link8.'?id='.$id_ped.'&parcela='.$i.'>1 Representante</a></td>';
+	echo '<td class="list_description"><a target="_blank" href='.$link9.'?id='.$id_ped.'&parcela='.$i.'>2 Representantes</a></td>';
 	echo '<td class="list_description"><a target="_blank" href='.$link7.'?id='.$id_ped.'&parcela='.$i.'>1 Representante</a></td>';
 	echo '<td class="list_description"><a target="_blank" href='.$link7.'?id='.$id_ped.'&parcela='.$i.'>2 Representantes</a></td>';
 } ?>	

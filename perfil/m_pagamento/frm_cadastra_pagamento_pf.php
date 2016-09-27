@@ -6,6 +6,7 @@ $http = $server."/pdf/";
 $link1=$http."rlt_pagamento_integral_pf.php";
 $link2=$http."rlt_pagamento_parcelado_pf.php?id=".$id_ped."";
 $link3=$http."rlt_recibo_pagamento_pf.php?id=".$id_ped."";
+$link4=$http."rlt_recibo_pagamento_parcelado_pf.php?id=".$id_ped."";
 $data = date('Y-m-d H:i:s');
 
 	$con = bancoMysqli();
@@ -124,7 +125,7 @@ for($i = 1; $i < count($parcelamento); $i++)
 	echo '<td class="list_description">R$ '.$parcelamento[$i]['valor'].'</td> ';
 	echo '<td class="list_description">'.$parcelamento[$i]['pagamento'].'</td>';
 	echo '<td class="list_description"><a target="_blank" href='.$link2.'&parcela='.$i.'>Pagamento</a></td>';
-	echo '<td class="list_description"><a target="_blank" href='.$link3.'&parcela='.$i.'>Recibo</a></td></tr>';
+	echo '<td class="list_description"><a target="_blank" href='.$link4.'&parcela='.$i.'>Recibo</a></td></tr>';
 } ?>	
 
 					</tbody>
