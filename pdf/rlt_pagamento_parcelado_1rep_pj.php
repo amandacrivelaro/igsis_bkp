@@ -1,41 +1,18 @@
 <?php 
-   
-      
-   // INSTALAÇÃO DA CLASSE NA PASTA FPDF.
-	require_once("../include/lib/fpdf/fpdf.php");
 	
-   //require '../include/';
-   require_once("../funcoes/funcoesConecta.php");
-   require_once("../funcoes/funcoesGerais.php");
-   require_once("../funcoes/funcoesSiscontrat.php");
+//require '../include/';
+require_once("../funcoes/funcoesConecta.php");
+require_once("../funcoes/funcoesGerais.php");
+require_once("../funcoes/funcoesSiscontrat.php");
 
-   //CONEXÃO COM BANCO DE DADOS 
-   $conexao = bancoMysqli();
-
-   
-class PDF extends FPDF
-{
-// Page header
-function Header()
-{
-	session_start();
-	$inst = recuperaDados("ig_instituicao",$_SESSION['idInstituicao'],"idInstituicao");
-	$logo = "../visual/img/".$inst['logo']; 
-    // Logo
-    $this->Image($logo,20,20,50);
-    // Move to the right
-    $this->Cell(80);
-    $this->Image('../visual/img/logo_smc.jpg',170,10);
-    // Line break
-    $this->Ln(20);
-}
-
-}
+//CONEXÃO COM BANCO DE DADOS 
+$conexao = bancoMysqli();
 
 
 //CONSULTA 
 $id_ped=$_GET['id'];
 $ano=date('Y');
+$dataAtual = date("d/m/Y");
 
 dataPagamento($id_ped);
 
@@ -136,121 +113,43 @@ $rep02Email = $rep02["Email"];
 $rep02INSS = $rep02["INSS"];
 
 
-// GERANDO O PDF:
-$pdf = new PDF('P','mm','A4'); //CRIA UM NOVO ARQUIVO PDF NO TAMANHO A4
-$pdf->AliasNbPages();
-$pdf->AddPage();
-
-   
-$x=20;
-$l=6; //DEFINE A ALTURA DA LINHA   
-   
-   $pdf->SetXY( $x , 40 );// SetXY - DEFINE O X (largura) E O Y (altura) NA PÁGINA
-
-   
-   $pdf->SetX($x);
-   $pdf->SetFont('Arial','B', 14);
-   $pdf->Cell(180,5,utf8_decode("PEDIDO DE PAGAMENTO DE PESSOA JURÍDICA"),0,1,'C');
-   
-   $pdf->Ln();
-   $pdf->Ln();
-   
-   $pdf->SetX($x);
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(180,$l,utf8_decode("Ilustríssimo(a) Senhor(a) Diretor(a)"),0,1,'L');
-   
-   $pdf->SetX($x);
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(180,$l,utf8_decode("Secretaria Municipal de Cultura"),0,1,'L');
-   
-   $pdf->Ln();
-   $pdf->Ln();
-   
-   $pdf->SetX($x);
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(33,$l,'Nome da empresa:',0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->MultiCell(155,$l,utf8_decode($pjRazaoSocial));
-   
-   $pdf->SetX($x);
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(10,$l,utf8_decode('CCM:'),0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(65,$l,utf8_decode($pjCCM),0,0,'L');
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(12,$l,utf8_decode('CNPJ:'),0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(65,$l,utf8_decode($pjCNPJ),0,1,'L');
-   
-   $pdf->SetX($x);
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(20,$l,utf8_decode('Endereço:'),0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->MultiCell(160,$l,utf8_decode($pjEndereco));
-   
-   $pdf->SetX($x);
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(17,$l,utf8_decode('Telefone:'),0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(75,$l,utf8_decode($pjTelefones),0,0,'L');
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(13,$l,utf8_decode('E-mail:'),0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(65,$l,utf8_decode($pjEmail),0,1,'L');
-   
-   $pdf->Ln();
-   
-   $pdf->SetX($x);
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(15,$l,'Objeto:',0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->MultiCell(165,$l,utf8_decode($Objeto));
-  
-   $pdf->SetX($x);
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(27,$l,utf8_decode('Data / Período:'),0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->MultiCell(153,$l,utf8_decode($Periodo));
-   
-   $pdf->SetX($x);
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(12,$l,'Local:',0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->MultiCell(168,$l,utf8_decode($Local));
-   
-   $pdf->SetX($x);
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(12,$l,'Valor:',0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->MultiCell(168,$l,utf8_decode("R$ $valorParcela"."  "."($ValorPorExtenso )"));
-      
-   $pdf->Ln();
-   
-   $pdf->SetX($x);
-   $pdf->SetFont('Arial','', 10);
-   $pdf->MultiCell(180,$l,utf8_decode("Venho, mui respeitosamente, requerer  que Vossa Senhoria se digne  submeter a exame   à  decisão do órgão competente o pedido supra.
-Declaro, sob as penas da Lei, não possuir débitos perante as Fazendas Públicas, em especial com a Prefeitura do Município de São Paulo.
-Nestes termos, encaminho para deferimento."));   
-   
-   $pdf->Ln();
-   $pdf->Ln();
-   
-   $pdf->SetX($x);
-   $pdf->SetFont('Arial','', 11);
-   $pdf->MultiCell(180,$l,utf8_decode("São Paulo, _______ de ________________________ de ".$ano."."));
-   
-   
-//RODAPÉ PERSONALIZADO
-   $pdf->SetXY($x,262);
-   $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(85,$l,utf8_decode($rep01Nome),'T',1,'L');
-   
-   $pdf->SetX($x);
-   $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(85,$l,"RG: ".$rep01RG,0,0,'L');
-   
-   
-$pdf->Output();
-
+// GERANDO O WORD:
+header("Content-type: application/vnd.ms-word");
+header("Content-Disposition: attachment;Filename=$dataAtual - Processo SEI $NumeroProcesso - Parcela $id_parcela.doc");
 
 ?>
+
+<html>
+<meta http-equiv=\"Content-Type\" content=\"text/html; charset=Windows-1252\">
+<body>
+
+<p align="center"><strong>PEDIDO DE PAGAMENTO DE PESSOA JURÍDICA</strong></p>
+<p>&nbsp;</p>
+<p><strong>
+	Ilustríssimo(a) Senhor(a) Diretor(a)</br>
+	Secretaria Municipal de Cultura
+</strong></p>
+<p>&nbsp;</p>
+<p align="justify"><strong>Nome da empresa:</strong> <?php echo $pjRazaoSocial?></p>
+<p><strong>CCM:</strong> <?php echo $pjCCM?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>CNPJ:</strong> <?php echo $pjCNPJ?></p>   
+<p><strong>Endereço:</strong> <?php echo $pjEndereco?></p>
+<p><strong>Telefone:</strong> <?php echo $pjTelefones?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>E-mail:</strong> <?php echo $pjEmail?></p>  
+<p>&nbsp;</p>
+<p align="justify"><strong>Objeto:</strong> <?php echo $Objeto?></p>   
+<p align="justify"><strong>Data / Período:</strong> <?php echo $Periodo?></p> 
+<p align="justify"><strong>Local:</strong> <?php echo $Local?></p>
+<p align="justify"><strong>Valor:</strong> R$ <?php echo $valorParcela?> (<?php echo $ValorPorExtenso?> )</p>
+<p>&nbsp;</p>
+<p align="justify">Venho, mui respeitosamente, requerer  que Vossa Senhoria se digne  submeter a exame   à  decisão do órgão competente o pedido supra.</p>
+<p align="justify">Declaro, sob as penas da Lei, não possuir débitos perante as Fazendas Públicas, em especial com a Prefeitura do Município de São Paulo.
+Nestes termos, encaminho para deferimento.</p>
+<p>&nbsp;</p>
+<p align="justify">São Paulo, _______ de ________________________ de <?php echo $ano?></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>________________________</p>
+<p><?php echo $rep01Nome?></p>
+<p>RG: <?php echo $rep01RG?></p>   
+
+</body>
+</html>
