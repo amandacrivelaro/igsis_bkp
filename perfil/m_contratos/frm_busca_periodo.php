@@ -94,7 +94,7 @@ $i = 0;
 					$formaPagamento = $pedido['formaPagamento'];
 				}
 
-			if ($pedido ['estado'] == 2 OR 	$pedido ['estado'] == 3 OR $pedido ['estado'] == 4 OR $pedido ['estado'] == 5 OR
+			if ( $pedido ['estado'] == 1 OR $pedido ['estado'] == 2 OR 	$pedido ['estado'] == 3 OR $pedido ['estado'] == 4 OR $pedido ['estado'] == 5 OR
 			$pedido ['estado'] == 6 OR $pedido ['estado'] == 13) {
 				
 			$x[$i]['id']= $pedido['idPedidoContratacao'];
