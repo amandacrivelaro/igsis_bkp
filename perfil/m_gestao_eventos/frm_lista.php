@@ -6,7 +6,7 @@ $con = bancoMysqli();
 $x = recuperaDados('ig_usuario',$_SESSION['idUsuario'],'idUsuario');
 $local = $x['local'];
 $sql_lista = "
-SELECT DISTINCT idEvento FROM ig_ocorrencia WHERE publicado = 1 AND idEvento IN (SELECT idEvento FROM ig_evento WHERE publicado = 1 AND dataEnvio IS NULL AND idEvento NOT IN (SELECT DISTINCT idEvento FROM igsis_pedido_contratacao WHERE publicado = 1 AND estado IS NULL) )AND local IN ($local) ORDER BY dataInicio DESC";
+SELECT DISTINCT idEvento FROM ig_ocorrencia WHERE publicado = 1 AND idEvento IN (SELECT idEvento FROM ig_evento WHERE publicado = 1 AND statusEvento = 'Aguardando' AND dataEnvio IS NULL AND idEvento NOT IN (SELECT DISTINCT idEvento FROM igsis_pedido_contratacao WHERE publicado = 1 AND estado IS NULL) )AND local IN ($local) ORDER BY dataInicio DESC";
 $query_lista = mysqli_query($con,$sql_lista);
 
 ?>

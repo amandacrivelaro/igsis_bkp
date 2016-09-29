@@ -5,7 +5,7 @@ if(isset($_POST['finalizar'])){
 	$datetime = date("Y-m-d H:i:s");
 	$instituicao = $_SESSION['idInstituicao'];
 	$idEvento = $_SESSION['idEvento'];
-	$sql_atualiza_evento = "UPDATE ig_evento SET dataEnvio = '$datetime' WHERE idEvento = '$idEvento'";
+	$sql_atualiza_evento = "UPDATE ig_evento SET dataEnvio = '$datetime', statusEvento = 'Enviado' WHERE idEvento = '$idEvento'";
 	$query_atualiza_evento = mysqli_query($con,$sql_atualiza_evento);
 	if($query_atualiza_evento){
 		gravarLog($sql_atualiza_evento);

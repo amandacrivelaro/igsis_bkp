@@ -148,7 +148,8 @@ if(isset($_POST['atualizar'])){
 		`sinopse` = '$sinopse', 
 	`releaseCom` = '$releaseCom', 
 	`linksCom` = '$linksCom',
-	 `publicado` = 1
+	 `publicado` = 1,
+	 `statusEvento` = 'Em elaboração'
 	WHERE `ig_evento`.`idEvento` = ".$_SESSION['idEvento'].";";
 	/*
 	$sql_atualizar = "UPDATE ig_evento SET
@@ -2536,13 +2537,26 @@ if($ocorrencia > 0){
             </div>
             <br />
             <br />
-            <p><?php echo $prazo['mensagem']; ?><p>
-            
+            <p><?php echo $prazo['mensagem'];?><p>
+
+<?php $pedido = listaPedidoContratacao($_SESSION['idEvento']);	?>		
+			
+<?php if($pedido == NULL){ ?>			
+	<div class="form-group">
+        <div class="col-md-offset-2 col-md-8">
+	        <form method='POST' action='?perfil=aprovacao_evento'>
+			<input type='hidden' name='aprovacao_evento' value='<?php echo $campo['idEvento'] ?>' />
+			<input type ='submit' class='btn btn-theme btn-lg btn-block' value='Solicitar Envio' onclick="this.disabled = true; this.value = 'Enviando…'; this.form.submit();"></form>
+        </div>
+    </div>
+<?php } ?>   
+        
 <?php
 if($ocorrencia > 0
 AND $campos['total'] == 0
 AND $prazo['fora'] == 0
-){
+)
+{
 
  ?>            
             
