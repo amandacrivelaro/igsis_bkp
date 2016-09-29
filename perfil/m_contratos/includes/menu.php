@@ -31,7 +31,7 @@ $usuario = recuperaDados("ig_usuario",$_SESSION['idUsuario'],"idUsuario");
 			</ul>
 		</li>
         -->
-        
+        <li><a href="<?php echo $pasta ?>frm_sem_operador">Sem Operador</a></li>
 		<li><a href="<?php echo $pasta ?>frm_busca">Contratos</a></li>
   		<li><a href="<?php echo $pasta ?>frm_busca_periodo">Contratos por período</a></li>
 		<li><a href="<?php echo $pasta ?>frm_busca_dataenvio">Contratos por data de envio</a></li>
