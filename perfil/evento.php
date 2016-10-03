@@ -2558,8 +2558,13 @@ AND $prazo['fora'] == 0
 )
 {
 
- ?>            
-            
+ ?>      
+	<div class="col-md-offset-1 col-md-10">
+		<h4><font color="red">Sistema fechado para envio de programação com pedido de contratação.</font></h4>
+		<p><strong>Dúvidas entrar em contato com a Débora através do e-mail dsbueno@prefeitura.sp.gov.br</strong></p>
+	</div>
+ 
+        <!-- BOTÃO NORMAL DE ENVIO
                           <div class="form-group">
             <div class="col-md-offset-2 col-md-8">
 	          <form method='POST' action='?perfil=evento&p=finalizar'>
@@ -2568,6 +2573,7 @@ AND $prazo['fora'] == 0
 
             </div>
         </div>
+		-->
 <?php 
 }
 ?>
