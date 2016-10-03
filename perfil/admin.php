@@ -28,7 +28,7 @@ require "../funcoes/funcoesSiscontrat.php"; //chamar funcoes do administrador
    							<li><a href="?perfil=admin&p=estatistica"> Estatística</a></li>
                             <li><a href="?perfil=admin&p=reabertura"> Reabrir eventos enviados</a></li>
    							<li><a href="?perfil=admin&p=scripts"> Scripts</a></li>
-							<li><a href="?perfil=admin&p=email">E-mail de reabertura</a></li>
+							<li><a href="?perfil=admin&p=email">E-mail para solicitação de reenvio</a></li>
    							<li><a href="?perfil=admin&p=contratos">Contratos</a></li>
 							<li><a href="?secao=perfil">Carregar módulo</a></li>
 							<li><a href="?secao=ajuda">Ajuda</a></li>
@@ -63,7 +63,7 @@ case "inicial":
    	            <a href="?perfil=admin&p=estatistica" class="btn btn-theme btn-lg btn-block">Estatísticas do Sistema</a>
                 <a href="?perfil=admin&p=reabertura" class="btn btn-theme btn-lg btn-block">Reabrir eventos enviados</a>
                 <a href="?perfil=admin&p=scripts" class="btn btn-theme btn-lg btn-block">Scripts</a>
-				<a href="?perfil=admin&p=email" class="btn btn-theme btn-lg btn-block">E-mail para reabertura</a>
+				<a href="?perfil=admin&p=email" class="btn btn-theme btn-lg btn-block">E-mail para solicitação de reenvio</a>
                 <a href="?perfil=admin&p=sof" class="btn btn-theme btn-lg btn-block">Integração SOF / IGSIS</a>
 
 	            <!--<a href="?perfil=busca&p=pedidos" class="btn btn-theme btn-lg btn-block">Pedidos de contratação</a>-->
