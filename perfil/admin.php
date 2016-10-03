@@ -28,6 +28,7 @@ require "../funcoes/funcoesSiscontrat.php"; //chamar funcoes do administrador
    							<li><a href="?perfil=admin&p=estatistica"> Estatística</a></li>
                             <li><a href="?perfil=admin&p=reabertura"> Reabrir eventos enviados</a></li>
    							<li><a href="?perfil=admin&p=scripts"> Scripts</a></li>
+							<li><a href="?perfil=admin&p=email">E-mail de reabertura</a></li>
    							<li><a href="?perfil=admin&p=contratos">Contratos</a></li>
 							<li><a href="?secao=perfil">Carregar módulo</a></li>
 							<li><a href="?secao=ajuda">Ajuda</a></li>
@@ -62,6 +63,7 @@ case "inicial":
    	            <a href="?perfil=admin&p=estatistica" class="btn btn-theme btn-lg btn-block">Estatísticas do Sistema</a>
                 <a href="?perfil=admin&p=reabertura" class="btn btn-theme btn-lg btn-block">Reabrir eventos enviados</a>
                 <a href="?perfil=admin&p=scripts" class="btn btn-theme btn-lg btn-block">Scripts</a>
+				<a href="?perfil=admin&p=email" class="btn btn-theme btn-lg btn-block">E-mail para reabertura</a>
                 <a href="?perfil=admin&p=sof" class="btn btn-theme btn-lg btn-block">Integração SOF / IGSIS</a>
 
 	            <!--<a href="?perfil=busca&p=pedidos" class="btn btn-theme btn-lg btn-block">Pedidos de contratação</a>-->
@@ -70,10 +72,47 @@ case "inicial":
           </div>
         </div>
     </div>
-</section>    
-
+</section>  
 
 <?php break; 
+case "email":
+?>
+
+<?php
+
+$con = bancoMysqli();
+$sql = "SELECT DISTINCT idEvento, ig_log_reabertura.data FROM igsis_agenda 
+INNER JOIN ig_log_reabertura ON idEveForm = idEvento
+WHERE idEvento NOT IN ( SELECT idEvento FROM ig_evento WHERE ( dataEnvio IS NOT NULL ) OR ( dataEnvio IS NULL AND ocupacao = 1))";
+$query = mysqli_query($con,$sql);
+
+
+?>
+<section id="inserir" class="home-section bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+			
+				<?php
+				$i = 0;
+				while($email = mysqli_fetch_array($query))
+				 {	
+					$evento = recuperaDados("ig_evento",$email['idEvento'],"idEvento");
+					$usuario = recuperaDados("ig_usuario", $evento['idResponsavel'],"idUsuario");
+					$data = exibirDataHoraBr($email['data']);
+					echo "<p align='left'>Bom dia!</p><p align='left'>Informamos que sua ig de número <font color='red'><strong>".$email['idEvento']."</strong></font> <strong>(".$evento['nomeEvento'].")</strong> foi reaberta no dia <font color='red'><strong>".$data."</strong></font> e não foi reenviada. Solicitamos que o reenvio seja feito, pois o evento sairá da agenda e só retornará após o mesmo.</p>
+					<p align='left'>Att.</p>
+					<p>Responsável: ".$usuario['email']."</p>";
+					echo "<p>-----------------------------</p>";
+					$i++;
+				}	
+				?>
+            </div>
+		</div>
+	</div>
+</section>  
+
+<?php break; //FIM EMAIL
 case "estatistica":
 ?>
 
