@@ -324,7 +324,8 @@ $data=date('Y');
 for($h = 0; $h < $x['num']; $h++)
  {
 	 $status = recuperaDados("sis_estado",$x[$h]['status'],"idEstado");
-	switch($x[$h]['pessoa']){
+	switch($x[$h]['pessoa'])
+	{
 	case 1:
 		echo "<tr><td class='lista'> <a href='?perfil=contratos&p=frm_edita_propostapf&id_ped=".$x[$h]['id']."'>".$x[$h]['id']."</a></td>";
 	break;

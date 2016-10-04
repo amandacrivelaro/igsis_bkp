@@ -5,6 +5,7 @@ function Listar($tipoPessoa)
 {	
 $con = bancoMysqli();
 
+
 	if($tipoPessoa == "todos")
 	{
 		$tipo = "";	
@@ -76,6 +77,7 @@ $con = bancoMysqli();
 
 
 $linha_tabela_lista = Listar("todos"); //esse gera uma array com os pedidos
+//$status = recuperaDados("sis_estado",$x[$h]['status'],"idEstado");
 
 //$tipoPessoa,$instituicao,$num_registro,$pagina,$ordem,$estado
 
@@ -90,7 +92,7 @@ $link="index.php?perfil=contratos&p=frm_edita_propostapf&id_ped=";
 <h1>&nbsp;</h1>
 		<div class="container">
 			
-			<div class="sub-title">BUSCA POR PEDIDOS SEM OPERADOR</div>
+			<div class="sub-title"><h2>BUSCA POR PEDIDOS SEM OPERADOR</h2></div>
 				<p><?php if(isset($mensagem)){ echo $mensagem; }?></p>	
 					<div class="table-responsive list_info">
 						<table class="table table-condensed">
@@ -113,9 +115,12 @@ $link="index.php?perfil=contratos&p=frm_edita_propostapf&id_ped=";
 	$data=date('Y');
 	for($i = 0; $i < count($linha_tabela_lista); $i++)
 	{
-	 
+		
+		
+	
 		$linha_tabela_pedido_contratacaopf = recuperaDados("sis_pessoa_fisica",$linha_tabela_lista[$i]['IdProponente'],"Id_PessoaFisica");
-		$chamado = recuperaAlteracoesEvento($linha_tabela_lista[$i]['idEvento']);	 
+		$chamado = recuperaAlteracoesEvento($linha_tabela_lista[$i]['idEvento']);
+		$status = recuperaDados("sis_estado",$linha_tabela_lista[$i]['Status'],"idEstado");
 		echo "<tr><td class='lista'> <a href='".$link.$linha_tabela_lista[$i]['idPedido']."'>".$linha_tabela_lista[$i]['idPedido']."</a></td>";
 		echo '<td class="list_description">'.$linha_tabela_pedido_contratacaopf['Nome'].'</td> ';
 		echo '<td class="list_description">'.$linha_tabela_lista[$i]['Objeto'].' [';
@@ -132,8 +137,16 @@ $link="index.php?perfil=contratos&p=frm_edita_propostapf&id_ped=";
 		echo '<td class="list_description">'.$linha_tabela_lista[$i]['Local'].'</td> ';
 		echo '<td class="list_description">'.$linha_tabela_lista[$i]['Periodo'].'</td> ';
 		//echo '<td class="list_description">'.$linha_tabela_lista[$i]['NumeroProcesso'].'</td>';
-		echo '<td class="list_description">'.$linha_tabela_lista[$i]['Status'].'</td> </tr>';
+		echo '<td class="list_description">'.$status['estado'].'</td> </tr>';
+	
+
+	
+	
 	}
+
+
+
+
 
 ?>
 	
