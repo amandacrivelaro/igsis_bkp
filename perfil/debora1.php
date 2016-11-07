@@ -1,4 +1,4 @@
-<?php
+0<?php
 require "../funcoes/funcoesSiscontrat.php";
 ?>
 	
@@ -22,6 +22,8 @@ require "../funcoes/funcoesSiscontrat.php";
 							<td>Parcelas</td>
 							<td>Verba</td>
                             <td>Processo</td>
+							<td>Dotação</td>
+							<td>Finanças</td>
 						</tr>
 					</thead>
 				
@@ -66,7 +68,9 @@ while($pedido = mysqli_fetch_array($query_pf))
 	echo '<td class="list_description">'.dinheiroParaBr($ped['ValorGlobal']).'</td> ';
 	echo '<td class="list_description">'.$ped['parcelas'].'</td> ';
 	echo '<td class="list_description">'.$verba['Verba'].'</td> ';
-	echo '<td class="list_description">'.$ped['NumeroProcesso'].'</td> </tr>';
+	echo '<td class="list_description">'.$ped['NumeroProcesso'].'</td>';
+	echo '<td class="list_description">'.$ped['ComplementoDotacao'].'</td>';
+	echo '<td class="list_description">'.$ped['aprovacaoFinanca'].'</td> </tr>';
 	}
 
 ?>
