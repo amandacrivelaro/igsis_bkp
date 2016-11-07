@@ -81,15 +81,13 @@ $pdf->AddPage();
 $x=20;
 $l=7; //DEFINE A ALTURA DA LINHA   
    
-   $pdf->SetXY( $x , 45 );// SetXY - DEFINE O X (largura) E O Y (altura) NA PÁGINA
+   $pdf->SetXY( $x , 40 );// SetXY - DEFINE O X (largura) E O Y (altura) NA PÁGINA
 
    
    $pdf->SetX($x);
    $pdf->SetFont('Arial','B', 14);
    $pdf->Cell(180,5,utf8_decode("RECIBO DE PAGAMENTO"),0,1,'C');
    
-   $pdf->Ln();
-   $pdf->Ln();
    $pdf->Ln();
    $pdf->Ln();
    
@@ -199,11 +197,15 @@ $l=7; //DEFINE A ALTURA DA LINHA
    $pdf->SetFont('Arial','', 10);
    $pdf->MultiCell(164,$l,utf8_decode($Duracao."utos"));
    
+   $pdf->Ln();
+   
    $pdf->SetX($x);
    $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(12,$l,'Local:',0,0,'L');
+   $pdf->Cell(16,$l,utf8_decode('Observações:'),0,1,'L');
+   
+   $pdf->SetX($x);
    $pdf->SetFont('Arial','', 10);
-   $pdf->MultiCell(168,$l,utf8_decode($Local));
+   $pdf->MultiCell(180,$l,utf8_decode('A validade deste recibo fica condicionada ao efetivo recebimento por ordem de pagamento ou credito em conta corrente no Banco do Brasil pelo contratado, ou na falta deste, ao recebimento no Departamento do Tesouro da Secretaria de fianças e Desenvolvimento Econômico, situado á Rua Pedro Américo, 32.'));
    
    $pdf->Ln();
    $pdf->Ln();
