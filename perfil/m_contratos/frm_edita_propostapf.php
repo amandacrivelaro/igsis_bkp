@@ -174,7 +174,7 @@ $pedido = recuperaDados("igsis_pedido_contratacao",$_GET['id_ped'],"idPedidoCont
 <!-- Coordenador de Contratos -->
 							<?php 
 				$coord = recuperaDados("ig_usuario",$_SESSION['idUsuario'],"idUsuario");
-				if($coord['contratos'] ==  2){
+				if($coord['contratos'] ==  3){
 				?>	
 				<form class="form-horizontal" role="form" action="?perfil=contratos&p=frm_edita_propostapf&id_ped=<?php echo $id_ped; ?>" method="post">
 

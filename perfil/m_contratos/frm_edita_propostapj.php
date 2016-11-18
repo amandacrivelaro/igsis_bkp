@@ -253,7 +253,7 @@ $res02 = siscontratDocs($ped['idRepresentante02'],3);
 <!-- Coordenador de Contratos -->
 							<?php 
 				$coord = recuperaDados("ig_usuario",$_SESSION['idUsuario'],"idUsuario");
-				if($coord['contratos'] ==  2){
+				if($coord['contratos'] ==  3){
 				?>	
 				<form class="form-horizontal" role="form" action="?perfil=contratos&p=frm_edita_propostapj&id_ped=<?php echo $id_ped; ?>" method="post">
 
